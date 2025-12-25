@@ -22,10 +22,13 @@ export const purchaseSubscription = async ({ customer_id, plan_id }) => {
 
     // Check existing active subscription
     const subCheck = await client.query(
-      `SELECT 1 FROM subscriptions 
-       WHERE customer_id=$1 AND plan_id=$2 AND status='active'`,
+      `SELECT 1 FROM subscriptions
+      WHERE customer_id=$1
+     AND plan_id=$2
+     AND status='active'`,
       [customer_id, plan_id]
     );
+
 
     if (subCheck.rows.length)
       throw new Error("Already subscribed");
